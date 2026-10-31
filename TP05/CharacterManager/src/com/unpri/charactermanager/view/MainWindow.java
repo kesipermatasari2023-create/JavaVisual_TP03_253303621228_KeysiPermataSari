@@ -1,14 +1,16 @@
+
 package com.unpri.charactermanager.view;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 import com.unpri.charactermanager.model.Character;
 import com.unpri.charactermanager.model.CharacterManager;
-import com.unpri.charactermanager.model.CharacterType;
 
 public class MainWindow extends JFrame {
+
+    // Batas level disimpan sebagai konstanta
+    private static final int HIGH_LEVEL_THRESHOLD = 5;
 
     private CharacterManager manager;
 
@@ -23,62 +25,50 @@ public class MainWindow extends JFrame {
 
         this.manager = manager;
 
-        setTitle("Character Manager - Sprint #3");
+        setTitle("Character Manager - Sprint #4");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        setMinimumSize(new Dimension(650, 500));
 
         // Panel utama
         JPanel mainPanel = new JPanel(new BorderLayout(15, 15));
 
-        mainPanel.setBackground(new Color(25, 27, 40));
+        mainPanel.setBackground(AppTheme.BACKGROUND);
 
-        mainPanel.setBorder(
-            new EmptyBorder(20, 20, 20, 20)
-        );
+        mainPanel.setBorder(AppTheme.MAIN_BORDER);
+
+        mainPanel.setPreferredSize(new Dimension(750, 600));
 
         // =========================
         // HEADER
         // =========================
 
-        JPanel headerPanel = new JPanel(new BorderLayout());
+        JPanel headerPanel = new JPanel();
+
+        headerPanel.setLayout(
+                new BoxLayout(headerPanel, BoxLayout.Y_AXIS)
+        );
 
         headerPanel.setOpaque(false);
 
         JLabel titleLabel = new JLabel("CHARACTER MANAGER");
 
-        titleLabel.setFont(
-            new Font("Arial", Font.BOLD, 25)
-        );
+        titleLabel.setFont(AppTheme.TITLE_FONT);
 
-        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setForeground(AppTheme.TEXT);
 
         JLabel subtitleLabel = new JLabel(
-            "Manage your favorite game characters"
+                "Sprint #4 - Theming and Component Properties"
         );
 
-        subtitleLabel.setFont(
-            new Font("Arial", Font.PLAIN, 13)
-        );
+        subtitleLabel.setFont(AppTheme.SMALL_FONT);
 
-        subtitleLabel.setForeground(
-            new Color(180, 185, 205)
-        );
+        subtitleLabel.setForeground(AppTheme.MUTED_TEXT);
 
-        JPanel titlePanel = new JPanel();
+        headerPanel.add(titleLabel);
 
-        titlePanel.setLayout(
-            new BoxLayout(titlePanel, BoxLayout.Y_AXIS)
-        );
+        headerPanel.add(Box.createVerticalStrut(5));
 
-        titlePanel.setOpaque(false);
-
-        titlePanel.add(titleLabel);
-        titlePanel.add(Box.createVerticalStrut(5));
-        titlePanel.add(subtitleLabel);
-
-        headerPanel.add(titlePanel, BorderLayout.WEST);
+        headerPanel.add(subtitleLabel);
 
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
@@ -89,41 +79,35 @@ public class MainWindow extends JFrame {
         cardsPanel = new JPanel();
 
         cardsPanel.setLayout(
-            new BoxLayout(cardsPanel, BoxLayout.Y_AXIS)
+                new BoxLayout(cardsPanel, BoxLayout.Y_AXIS)
         );
 
-        cardsPanel.setBackground(
-            new Color(35, 38, 55)
-        );
+        cardsPanel.setBackground(AppTheme.SURFACE);
 
-        cardsPanel.setBorder(
-            new EmptyBorder(15, 15, 15, 15)
-        );
+        cardsPanel.setBorder(AppTheme.PANEL_BORDER);
 
         JScrollPane scrollPane = new JScrollPane(cardsPanel);
 
-        scrollPane.setBorder(null);
+        scrollPane.setBorder(AppTheme.NO_BORDER);
 
-        scrollPane.getViewport().setBackground(
-            new Color(35, 38, 55)
-        );
+        scrollPane.getViewport().setBackground(AppTheme.SURFACE);
 
         mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         // =========================
-        // FOOTER / STATISTIK
+        // FOOTER DAN STATISTIK
         // =========================
 
         JPanel footerPanel = new JPanel();
 
         footerPanel.setLayout(
-            new BoxLayout(footerPanel, BoxLayout.Y_AXIS)
+                new BoxLayout(footerPanel, BoxLayout.Y_AXIS)
         );
 
         footerPanel.setOpaque(false);
 
         JPanel statisticsPanel = new JPanel(
-            new GridLayout(1, 2, 15, 0)
+                new GridLayout(1, 2, 15, 0)
         );
 
         statisticsPanel.setOpaque(false);
@@ -132,39 +116,30 @@ public class MainWindow extends JFrame {
 
         averageLabel = new JLabel();
 
-        countLabel.setFont(
-            new Font("Arial", Font.BOLD, 14)
-        );
+        countLabel.setFont(AppTheme.SECTION_FONT);
 
-        averageLabel.setFont(
-            new Font("Arial", Font.BOLD, 14)
-        );
+        averageLabel.setFont(AppTheme.SECTION_FONT);
 
-        countLabel.setForeground(Color.WHITE);
+        countLabel.setForeground(AppTheme.TEXT);
 
-        averageLabel.setForeground(Color.WHITE);
+        averageLabel.setForeground(AppTheme.GOLD);
 
         statisticsPanel.add(countLabel);
+
         statisticsPanel.add(averageLabel);
 
         // Tombol tambah karakter
         addButton = new JButton("+ Tambah Karakter");
 
-        addButton.setFont(
-            new Font("Arial", Font.BOLD, 14)
-        );
+        addButton.setFont(AppTheme.BODY_FONT);
 
-        addButton.setForeground(Color.WHITE);
+        addButton.setForeground(AppTheme.TEXT);
 
-        addButton.setBackground(
-            new Color(100, 90, 220)
-        );
+        addButton.setBackground(AppTheme.ACCENT);
 
         addButton.setFocusPainted(false);
 
-        addButton.setBorder(
-            new EmptyBorder(12, 20, 12, 20)
-        );
+        addButton.setBorder(AppTheme.CARD_BORDER);
 
         addButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -183,10 +158,8 @@ public class MainWindow extends JFrame {
         // Menampilkan data pertama kali
         refreshDisplay();
 
-        // Menyesuaikan ukuran jendela
+        // Mengatur ukuran otomatis berdasarkan komponen
         pack();
-
-        setSize(750, 600);
 
         setLocationRelativeTo(null);
     }
@@ -200,60 +173,85 @@ public class MainWindow extends JFrame {
         JPanel card = new JPanel(new BorderLayout(10, 5));
 
         card.setMaximumSize(
-            new Dimension(Integer.MAX_VALUE, 75)
+                new Dimension(Integer.MAX_VALUE, 80)
         );
 
         card.setPreferredSize(
-            new Dimension(500, 75)
+                new Dimension(650, 80)
         );
 
+        // Properti tambahan 1:
+        // Tooltip memberikan informasi detail karakter
+        card.setToolTipText(
+                "Nama: " + character.getName()
+                + " | Level: " + character.getLevel()
+                + " | Role: " + character.getType()
+        );
+
+        // Properti tambahan 2:
+        // Border disesuaikan dengan role karakter
         card.setBorder(
-            new EmptyBorder(12, 15, 12, 15)
+                AppTheme.borderFor(character.getType())
         );
 
         card.setOpaque(true);
 
-        card.setBackground(getColorByType(character.getType()));
+        card.setBackground(
+                AppTheme.colorFor(character.getType())
+        );
 
+        // Label nama
         JLabel nameLabel = new JLabel(character.getName());
 
         nameLabel.setFont(
-            new Font("Arial", Font.BOLD, 16)
+                AppTheme.fontForLevel(character.getLevel())
         );
 
-        nameLabel.setForeground(Color.WHITE);
-
-        JLabel levelLabel = new JLabel(
-            "Level " + character.getLevel()
+        nameLabel.setForeground(
+                AppTheme.textColorForLevel(character.getLevel())
         );
 
-        levelLabel.setFont(
-            new Font("Arial", Font.BOLD, 14)
-        );
-
-        levelLabel.setForeground(Color.WHITE);
-
+        // Label role
         JLabel typeLabel = new JLabel(
-            character.getType().toString()
+                character.getType().toString()
         );
 
-        typeLabel.setFont(
-            new Font("Arial", Font.PLAIN, 12)
+        typeLabel.setFont(AppTheme.SMALL_FONT);
+
+        typeLabel.setForeground(AppTheme.TEXT);
+
+        // Label level
+        JLabel levelLabel = new JLabel(
+                "LEVEL " + character.getLevel()
         );
 
-        typeLabel.setForeground(
-            new Color(240, 240, 240)
-        );
+        // Mini-Challenge:
+        // Level >= 5 menggunakan tulisan emas dan tebal
+        if (character.getLevel() >= HIGH_LEVEL_THRESHOLD) {
 
+            levelLabel.setFont(AppTheme.GOLD_FONT);
+
+            levelLabel.setForeground(AppTheme.GOLD);
+
+        } else {
+
+            levelLabel.setFont(AppTheme.BODY_FONT);
+
+            levelLabel.setForeground(AppTheme.TEXT);
+        }
+
+        // Panel informasi
         JPanel informationPanel = new JPanel();
 
         informationPanel.setLayout(
-            new BoxLayout(informationPanel, BoxLayout.Y_AXIS)
+                new BoxLayout(informationPanel, BoxLayout.Y_AXIS)
         );
 
         informationPanel.setOpaque(false);
 
         informationPanel.add(nameLabel);
+
+        informationPanel.add(Box.createVerticalStrut(5));
 
         informationPanel.add(typeLabel);
 
@@ -265,99 +263,67 @@ public class MainWindow extends JFrame {
     }
 
     // =========================
-    // WARNA BERDASARKAN TIPE
-    // =========================
-
-    private Color getColorByType(CharacterType type) {
-
-        switch (type) {
-
-            case WARRIOR:
-                return new Color(170, 65, 65);
-
-            case MAGE:
-                return new Color(90, 75, 175);
-
-            case ARCHER:
-                return new Color(45, 135, 100);
-
-            case ASSASSIN:
-                return new Color(110, 75, 130);
-
-            case HEALER:
-                return new Color(50, 125, 160);
-
-            default:
-                return new Color(80, 80, 90);
-        }
-    }
-
-    // =========================
-    // UPDATE TAMPILAN
+    // REFRESH TAMPILAN
     // =========================
 
     private void refreshDisplay() {
 
         cardsPanel.removeAll();
 
-        // Mengambil data secara dinamis
+        // Mengambil data karakter secara dinamis
         for (Character character : manager.getAllCharacters()) {
 
             JPanel card = createCharacterCard(character);
 
             cardsPanel.add(card);
 
-            cardsPanel.add(
-                Box.createVerticalStrut(10)
-            );
+            cardsPanel.add(Box.createVerticalStrut(10));
         }
 
-        // Memperbarui statistik
+        // Memperbarui jumlah karakter
         countLabel.setText(
-            "Total Karakter: " + manager.getTotalCharacters()
+                "Total Karakter: " + manager.getTotalCharacters()
         );
 
+        // Memperbarui rata-rata level
         averageLabel.setText(
-            String.format(
-                java.util.Locale.US,
-                "Rata-rata Level: %.2f",
-                manager.getAverageLevel()
-            )
+                String.format(
+                        java.util.Locale.US,
+                        "Rata-rata Level: %.2f",
+                        manager.getAverageLevel()
+                )
         );
 
-        // Memperbarui tampilan
         cardsPanel.revalidate();
 
         cardsPanel.repaint();
     }
 
     // =========================
-    // MENAMBAHKAN KARAKTER BARU
+    // TAMBAH KARAKTER
     // =========================
 
     private void addNewCharacter() {
 
         Character newCharacter = new Character(
-            "Nova",
-            9,
-            CharacterType.HEALER
+                "Nova",
+                9,
+                com.unpri.charactermanager.model.CharacterType.MAGE
         );
 
         manager.addCharacter(newCharacter);
 
-        // Memperbarui daftar dan statistik
         refreshDisplay();
 
-        // Mencegah penambahan berulang
         addButton.setEnabled(false);
 
         addButton.setText("Karakter Berhasil Ditambahkan");
 
         JOptionPane.showMessageDialog(
-            this,
-            "Karakter Nova berhasil ditambahkan!",
-            "Berhasil",
-            JOptionPane.INFORMATION_MESSAGE
+                this,
+                "Karakter Nova berhasil ditambahkan!",
+                "Berhasil",
+                JOptionPane.INFORMATION_MESSAGE
         );
     }
 }

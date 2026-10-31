@@ -1,3 +1,4 @@
+
 package com.unpri.charactermanager;
 
 import javax.swing.SwingUtilities;
@@ -11,43 +12,45 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Membuat objek CharacterManager
+        // Membuat CharacterManager
         CharacterManager manager = new CharacterManager();
 
-        // Menambahkan karakter awal
+        // Data karakter
         manager.addCharacter(
-            new Character("Alucard", 10, CharacterType.WARRIOR)
+                new Character("Alucard", 10, CharacterType.WARRIOR)
         );
 
         manager.addCharacter(
-            new Character("Miya", 8, CharacterType.ARCHER)
+                new Character("Miya", 8, CharacterType.ARCHER)
         );
 
         manager.addCharacter(
-            new Character("Saber", 12, CharacterType.ASSASSIN)
+                new Character("Saber", 12, CharacterType.ASSASSIN)
         );
 
         manager.addCharacter(
-            new Character("Layla", 6, CharacterType.ARCHER)
+                new Character("Layla", 3, CharacterType.ARCHER)
         );
 
         manager.addCharacter(
-            new Character("Gusion", 14, CharacterType.MAGE)
-        );
-
-        // Dua karakter tambahan AP10
-        manager.addCharacter(
-            new Character("Fanny", 16, CharacterType.ASSASSIN)
+                new Character("Gusion", 14, CharacterType.MAGE)
         );
 
         manager.addCharacter(
-            new Character("Tigreal", 11, CharacterType.WARRIOR)
+                new Character("Fanny", 16, CharacterType.ASSASSIN)
+        );
+
+        manager.addCharacter(
+                new Character("Tigreal", 4, CharacterType.WARRIOR)
         );
 
         // Menjalankan GUI pada Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
+
             MainWindow window = new MainWindow(manager);
+
             window.setVisible(true);
+
         });
     }
 }
