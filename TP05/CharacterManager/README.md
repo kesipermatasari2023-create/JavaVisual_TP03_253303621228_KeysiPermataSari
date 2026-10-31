@@ -171,3 +171,75 @@ Program dimulai dari Main.java yang membuat objek CharacterManager dan memasukka
 Link analisis GUI dan MVC:
 [https://docs.google.com/document/d/1_GtfvAoyNY858vT93FwIZh9hws2aPYaj6LWQ9VVL6CI/edit?usp=sharing]
 
+
+# TP10 – Character Manager Sprint #4
+
+## A. Implementasi AppTheme
+
+Pada Sprint #4, aplikasi Character Manager menggunakan class AppTheme sebagai pusat pengaturan tampilan. AppTheme menyimpan warna, font, dan border yang digunakan oleh MainWindow.
+
+Fitur tema:
+- Background aplikasi menggunakan warna gelap.
+- Setiap role memiliki warna kartu berbeda.
+- Karakter dengan level minimal 5 mendapatkan teks emas dan tebal.
+- Font menggunakan logical font SansSerif.
+- Border kartu menyesuaikan role karakter.
+
+## B. Mini-Challenge dan Properti Tambahan
+
+Batas level tinggi disimpan dalam konstanta HIGH_LEVEL_THRESHOLD dengan nilai 5.
+
+Karakter dengan level >= 5 ditampilkan menggunakan warna emas dan font tebal.
+
+Dua properti tambahan yang diterapkan:
+
+1. **Tooltip:** Menampilkan informasi nama, level, dan role karakter ketika pointer mouse diarahkan ke kartu. Properti ini membantu pengguna mengetahui informasi karakter tanpa memenuhi tampilan utama.
+2. **Border berdasarkan role:** Setiap kartu memiliki border dengan warna yang mengikuti role karakter. Hal ini mempermudah pengguna membedakan karakter secara visual.
+
+## C. Data Karakter
+
+| Nama | Level | Role |
+|---|---:|---|
+| Alucard | 10 | WARRIOR |
+| Miya | 8 | ARCHER |
+| Saber | 12 | ASSASSIN |
+| Layla | 3 | ARCHER |
+| Gusion | 14 | MAGE |
+| Fanny | 16 | ASSASSIN |
+| Tigreal | 4 | WARRIOR |
+
+Total karakter: 7
+
+Total level: 67
+
+Rata-rata level: 9.57
+
+## D. Mengapa Warna Disimpan di AppTheme?
+
+Warna disimpan di AppTheme karena pengaturan tampilan merupakan tanggung jawab View. Character sebagai Model hanya menyimpan informasi karakter seperti nama, level, dan role. Dengan memisahkan tema dari Model, perubahan tampilan dapat dilakukan tanpa mengubah struktur data karakter.
+
+Pemisahan tersebut juga membuat program lebih mudah dikembangkan dan dipelihara. Jika warna role ingin diubah, programmer cukup mengubah AppTheme tanpa mengubah Character.java atau CharacterManager.java.
+
+## E. Screenshot
+
+### Sebelum (Sprint #3 / v0.3)
+![alt text](before.png)
+
+### Sesudah (Sprint #4 / v0.4)
+![alt text](after.png)
+
+## F. Analisis Google Docs
+
+Link Google Docs Bagian D:
+[https://docs.google.com/document/d/12tHNQeVO46vodmkLwqnWLq-aCcTH9I9hE5iqt1VPI5Y/edit?usp=sharing]
+
+## G. Teknologi
+- Java JDK 21
+- Java Swing
+- JFrame
+- JPanel
+- JLabel
+- JButton
+- ArrayList
+- AppTheme
+- Model-View-Controller (MVC)
