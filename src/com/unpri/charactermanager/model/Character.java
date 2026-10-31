@@ -1,6 +1,11 @@
 package com.unpri.charactermanager.model;
 
+import java.util.Objects;
+
 public class Character {
+
+    // Variable static untuk melacak total karakter yang pernah di-instansiasi
+    private static int totalCharacterCreated = 0;
 
     private String name;
     private CharacterType type;
@@ -20,6 +25,31 @@ public class Character {
         this.type = type;
         setLevel(level);
         this.mana = 0;
+        totalCharacterCreated++;
+    }
+
+    // Copy constructor: membuat objek baru yang berdiri sendiri (independen) dari objek lain
+    public Character(Character other) {
+        if (other == null) {
+            throw new IllegalArgumentException("Karakter sumber tidak boleh null");
+        }
+        this.name = other.name;
+        this.type = other.type;
+        this.level = other.level;
+        this.hitPoints = other.hitPoints;
+        this.attack = other.attack;
+        this.mana = other.mana;
+        totalCharacterCreated++;
+    }
+
+    // Static Getter untuk totalCharacterCreated
+    public static int getTotalCharacterCreated() {
+        return totalCharacterCreated;
+    }
+
+    // Method untuk menghasilkan salinan independen
+    public Character copy() {
+        return new Character(this);
     }
 
     // Getter dan Setter untuk Name
@@ -83,6 +113,21 @@ public class Character {
         return hitPoints > 0;
     }
 
+    // Implementasi equals() berdasarkan perbandingan nama karakter (case-insensitive)
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Character character = (Character) o;
+        return name != null && name.equalsIgnoreCase(character.name);
+    }
+
+    // Implementasi hashCode() konsisten dengan equals()
+    @Override
+    public int hashCode() {
+        return name != null ? name.toLowerCase().hashCode() : 0;
+    }
+
     // Representasi string dari karakter
     @Override
     public String toString() {
@@ -96,4 +141,3 @@ public class Character {
                 '}';
     }
 }
-
