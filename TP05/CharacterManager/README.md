@@ -223,10 +223,10 @@ Pemisahan tersebut juga membuat program lebih mudah dikembangkan dan dipelihara.
 ## E. Screenshot
 
 ### Sebelum (Sprint #3 / v0.3)
-![alt text](before.png)
+![alt text](image-6.png)
 
 ### Sesudah (Sprint #4 / v0.4)
-![alt text](after.png)
+![alt text](image-7.png)
 
 ## F. Analisis Google Docs
 
